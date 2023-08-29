@@ -4,7 +4,17 @@ export default {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    
+    extend: {
+      colors:{
+        opcity:{
+          rgba:'rgb(161,161,161,50%)',
+        }
+        // primary:{
+        //   light:'rgb(161,161,161,50%)'
+        // },
+      }
+    },
   },
   plugins: [],
 }
