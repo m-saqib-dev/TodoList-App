@@ -13,7 +13,8 @@ const Form = (props:FormProps) => {
       e.preventDefault();
       const target = e.target as HTMLButtonElement;
       if (target.name === 'reset') {
-        alert('red')
+        setTitle('');
+        setTodo('');
       }else{
 
         onSubmit(title,todo)
