@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from "../button";
+import { AiOutlineClose } from "react-icons/ai";
 
 type ModalProp = {
   children: React.ReactNode;
@@ -8,20 +9,16 @@ type ModalProp = {
 export const CustomModal: React.FC<ModalProp> & {
   Header: React.FC<ModalProp>;
   Body: React.FC<ModalProp>;
+  Footer:React.FC<ModalProp>;
 } = ({ children}) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-//   useEffect(() => {
-//     setIsOpen(isOpen);
-//   }, [isOpen]);
-
+  const [isOpen, setIsOpen] = useState(true);
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
 
   return (
     <>
-    <div className="border-red-100 border w-4/5 flex justify-center items-center h-32 rounded-md border-dashed">
+    <div className="border-red-100 border w-4/5 relative flex justify-center items-center h-32 rounded-md border-dashed">
         <Button type='create' onClick={handleToggle}/>
     </div>
     <div
@@ -30,9 +27,9 @@ export const CustomModal: React.FC<ModalProp> & {
           isOpen ? "block" : "hidden"
       } flex bg-opcity-rgba justify-center items-center text-white h-screen w-full fixed top-0`}
     >
-      <div className="p-4 flex flex-col  text-white bg-slate-900 h-2/3 w-3/4">
-        <button onClick={handleToggle} type="button" className="p-2 self-end">
-          x
+      <div className="flex flex-col  text-white bg-slate-900 h-2/3 w-3/4">
+        <button onClick={handleToggle} type="button" className="p-2 self-end absolute">
+        <AiOutlineClose/>
         </button>
         {children}
       </div>
@@ -41,5 +38,6 @@ export const CustomModal: React.FC<ModalProp> & {
   );
 };
 
-CustomModal.Header = ({ children }) => <div className="text-4xl flex items-center justify-center my-10 h-16 w-full">{children}</div>;
+CustomModal.Header = ({ children }) => <div className="text-4xl flex items-center p-5  w-full">{children}</div>;
 CustomModal.Body = ({ children }) => <>{children}</>;
+CustomModal.Footer = ({ children }) => <div className="flex items-end justify-end gap-2 w-full h-full p-4">{children}</div>;
