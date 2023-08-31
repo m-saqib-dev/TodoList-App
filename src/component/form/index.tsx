@@ -1,9 +1,18 @@
 import Form from './Form'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { addTodo } from '../../features/todoSlice';
+import { RootState } from '../../store/rootReducer';
 
 const FormConnected = () => {
-    const handleSubmit=(title:string,todo:string)=>{
-        console.log(title+todo)
-    }
+  const dispatch = useDispatch();
+  const todos = useSelector((state: RootState) => state.todos);
+  const handleSubmit = (title: string, todo: string) => {
+    console.log('New Title:', title);
+    console.log('Existing Todos:', todos);
+    dispatch(addTodo({ title, todo }));
+  };
+  
   return (
     <>
         <Form onSubmit={handleSubmit}/>

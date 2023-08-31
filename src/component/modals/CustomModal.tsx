@@ -11,7 +11,7 @@ export const CustomModal: React.FC<ModalProp> & {
   Body: React.FC<ModalProp>;
   Footer:React.FC<ModalProp>;
 } = ({ children}) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };

@@ -1,26 +1,53 @@
 import { useState } from 'react'
 import Button from '../button'
 import { AiOutlineCheckCircle, AiOutlineMenu, AiTwotoneClockCircle } from 'react-icons/ai'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../store/rootReducer'
 
 const TodoList = () => {
-  const [viewMore,setViewMore] = useState("max-sm:line-clamp-2");
+  const todos = useSelector((state:RootState) => state.todos)
+  const [viewMore,setViewMore] = useState({
+    title:"max-sm:line-clamp-1",
+    todo:"max-sm:line-clamp-3",
+  });
+
+  const viewMoreHandler = () => {
+    if (viewMore.title === "" && viewMore.todo === "") {
+      setViewMore({
+        title: "max-sm:line-clamp-1",
+        todo: "max-sm:line-clamp-3",
+      });
+    } else {
+      setViewMore({
+        title: "",
+        todo: "",
+      });
+    }
+  };
 
   return (
-    <div className="flex w-4/5 bg-gradient-to-r from-slate-900 to-blue-950 p-1 my-2 rounded-md">
+    <>
+    {todos.map((todos)=>(
+    <div key={todos.id} className="flex w-4/5 bg-gradient-to-r from-slate-900 to-blue-950 p-1 my-2 rounded-md">
     <div className="p-1">
     <AiOutlineCheckCircle className="max-sm:text-lg text-2xl"/>
     </div>
-      <div className="flex p-1 text-xs flex-col">
-    <h1 onClick={()=>{setViewMore('')}} className={`w-full border ${viewMore} bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo, unde. Assumenda, suscipit natus quibusdam autem optio earum minus tempora possimus nam iste, quo facere illum laudantium nobis veniam exercitationem animi dicta vero ea! Tenetur consequuntur impedit obcaecati at. At, nesciunt!
-      </h1>
-      <div className='flex gap-1 py-2'>
+      <div className="flex p-1 text-xs w-full flex-col">
+        
+      <div className='flex  flex-col border'>
+        <h1 onClick={viewMoreHandler} className={`${viewMore.title} leading-5 my-2 text-lg border-l-4 px-1`}>
+         {todos.title}
+        </h1>
+        <p onClick={viewMoreHandler} className={`${viewMore.todo}`}>
+          {todos.todo}
+        </p>
+      </div>
+      <div className='flex justify-around border-t-2 my-2 border-b-2'>
       <div>
-            <h6 className="start-time">Created at : jun/21/2023 9:24 PM{}</h6>
+            <h6 className="text-center px-2">Created at <br /> jun/21/2023 9:24 PM{}</h6>
       </div>
       <div>
-            <h6 className="end-time">DeadLine : jun/26/2023 9:24 PM{}</h6>
-            
+            <h6 className="text-center px-2">Deadline<br /> jun/26/2023 9:24 PM{}</h6>
       </div>
       </div>
           </div>
@@ -37,6 +64,8 @@ const TodoList = () => {
           </div>
     </div>
   </div>
+  ))}
+  </>
   )
 }
 
