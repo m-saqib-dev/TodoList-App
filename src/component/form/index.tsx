@@ -10,7 +10,8 @@ const FormConnected = () => {
   const handleSubmit = (title: string, todo: string) => {
     console.log('New Title:', title);
     console.log('Existing Todos:', todos);
-    dispatch(addTodo({ title, todo }));
+    const completed = false;
+    dispatch(addTodo({ title, todo ,completed}));
   };
   
   return (
