@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { completeTodo, removeTodo, updateTodo } from "../../features/todoSlice";
-import { useState } from "react";
 import { RootState } from "../../store/rootReducer";
 import TodoItem from "./todoItem"; // Make sure the import path is correct
 
@@ -19,7 +18,7 @@ const TodoList = () => {
   const handleCheckTodo = (id: string, completed: boolean) => {
     dispatch(completeTodo({ id, completed }));
   };
-  const handleUpdateTodo = (id:string,title:string,todo:string,completed:boolean)=>{
+  const handleUpdateTodo = (id:string,title:string,todo:string)=>{
     console.log()
     dispatch(updateTodo({id,title,todo}))
   }
